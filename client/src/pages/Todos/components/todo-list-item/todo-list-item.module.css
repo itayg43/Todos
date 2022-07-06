@@ -1,0 +1,16 @@
+.item {
+  align-items: center;
+  background-color: lightgrey;
+  border-radius: 4px;
+  display: flex;
+  margin-bottom: 5px;
+  padding: 10px;
+  margin-right: 5px;
+}
+
+.value {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
