@@ -6,3 +6,5 @@ export const TODOS_FILTERS = {
   COMPLETED: "Completed",
   DELETED: "Deleted",
 };
+
+export const TODOS_FILTER_STORAGE_KEY = "TODOS_FILTER_STORAGE_KEY";

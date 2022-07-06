@@ -11,10 +11,9 @@ import {
   TOGGLE_IS_DELETED,
   TOGGLE_IS_DELETED_SUCCESS,
   TOGGLE_IS_DELETED_FAIL,
-  TODOS_FILTER_KEY,
   CHANGE_FILTER,
 } from "./constants";
-import { TODOS_FILTERS } from "../../helpers/constants";
+import { TODOS_FILTERS, TODOS_FILTER_STORAGE_KEY } from "../../helpers/constants";
 
 const initialState = {
   isLoading: false,
@@ -22,7 +21,7 @@ const initialState = {
   error: null,
   todos: [],
   visibleTodos: [],
-  filter: localStorage.getItem(TODOS_FILTER_KEY) || TODOS_FILTERS.PENDING,
+  filter: localStorage.getItem(TODOS_FILTER_STORAGE_KEY) || TODOS_FILTERS.PENDING,
 };
 
 const todosReducer = (state = initialState, { type, payload }) => {

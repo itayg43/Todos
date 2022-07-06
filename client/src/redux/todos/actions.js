@@ -11,12 +11,12 @@ import {
   TOGGLE_IS_DELETED,
   TOGGLE_IS_DELETED_SUCCESS,
   TOGGLE_IS_DELETED_FAIL,
-  TODOS_FILTER_KEY,
   CHANGE_FILTER,
   ACTIONS,
 } from "./constants";
 import todosService from "../../services/todos-service";
 import { getUpdatedTodos, getVisibleTodos } from "./utils";
+import { TODOS_FILTER_STORAGE_KEY } from "../../helpers/constants";
 
 export const fetchAllTodos = () => async (dispatch, getState) => {
   const { filter } = getState().todosReducer;
@@ -90,7 +90,7 @@ export const toggleTodoIsDeleted = (values) => async (dispatch, getState) => {
 };
 
 export const changeFilter = (filter) => async (dispatch, getState) => {
-  localStorage.setItem(TODOS_FILTER_KEY, filter);
+  localStorage.setItem(TODOS_FILTER_STORAGE_KEY, filter);
   const { todos } = getState().todosReducer;
   const visibleTodos = getVisibleTodos(todos, filter);
   dispatch({ type: CHANGE_FILTER, payload: { visibleTodos, filter } });
