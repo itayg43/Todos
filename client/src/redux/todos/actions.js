@@ -12,7 +12,6 @@ import {
   TOGGLE_IS_DELETED_SUCCESS,
   TOGGLE_IS_DELETED_FAIL,
   CHANGE_FILTER,
-  ACTIONS,
 } from "./constants";
 import todosService from "../../services/todos-service";
 import { getUpdatedTodos, getVisibleTodos } from "./utils";
@@ -38,7 +37,7 @@ export const submitTodo = (value) => async (dispatch, getState) => {
   try {
     dispatch({ type: SUBMIT_TODO });
     const todo = await todosService.submitTodo(value);
-    const updatedTodos = getUpdatedTodos(todos, todo, ACTIONS.SUBMIT);
+    const updatedTodos = todo.length ? [...todos, ...todo] : [...todos, todo];
     const visibleTodos = getVisibleTodos(updatedTodos, filter);
     dispatch({
       type: SUBMIT_TODO_SUCCESS,
@@ -49,9 +48,6 @@ export const submitTodo = (value) => async (dispatch, getState) => {
   }
 };
 
-/**
- * @param values {id, isCompleted}
- */
 export const toggleTodoIsCompleted = (values) => async (dispatch, getState) => {
   const { id, isCompleted } = values;
   const { todos, filter } = getState().todosReducer;
@@ -69,9 +65,6 @@ export const toggleTodoIsCompleted = (values) => async (dispatch, getState) => {
   }
 };
 
-/**
- * @param values {id, isDeleted}
- */
 export const toggleTodoIsDeleted = (values) => async (dispatch, getState) => {
   const { id, isDeleted } = values;
   const { todos, filter } = getState().todosReducer;

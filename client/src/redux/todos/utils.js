@@ -1,12 +1,8 @@
-import { ACTIONS } from "./constants";
 import { TODOS_FILTERS } from "../../helpers/constants";
 
-export const getUpdatedTodos = (todos, todo, afterAction = "") => {
-  if (afterAction === ACTIONS.SUBMIT) {
-    return todo.length ? [...todos, ...todo] : [...todos, todo];
-  }
+export const getUpdatedTodos = (todos, todo) => {
   const { id } = todo;
-  return todos.map((currTodo) => (currTodo.id === id ? todo : currTodo));
+  return todos.map((t) => (t.id === id ? todo : t));
 };
 
 export const getVisibleTodos = (todos, filter) => {

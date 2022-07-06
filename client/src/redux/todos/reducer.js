@@ -26,7 +26,8 @@ const initialState = {
 
 const todosReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    // load
+    // fetch
+    // all
     case FETCH_ALL_TODOS:
       return { ...state, ...onRequestLoading() };
     case FETCH_ALL_TODOS_SUCCESS:
@@ -40,21 +41,23 @@ const todosReducer = (state = initialState, { type, payload }) => {
       return { ...state, ...onRequestSuccess(payload) };
     case SUBMIT_TODO_FAIL:
       return { ...state, ...onRequestFail(payload) };
-    // toggle is completed
+    // toggle
+    // is completed
     case TOGGLE_IS_COMPLETED:
       return { ...state, ...onRequestLoading() };
     case TOGGLE_IS_COMPLETED_SUCCESS:
       return { ...state, ...onRequestSuccess(payload) };
     case TOGGLE_IS_COMPLETED_FAIL:
       return { ...state, ...onRequestFail(payload) };
-    // toggle is deleted
+    // is deleted
     case TOGGLE_IS_DELETED:
       return { ...state, ...onRequestLoading() };
     case TOGGLE_IS_DELETED_SUCCESS:
       return { ...state, ...onRequestSuccess(payload) };
     case TOGGLE_IS_DELETED_FAIL:
       return { ...state, ...onRequestFail(payload) };
-    // change filter
+    // change
+    // filter
     case CHANGE_FILTER:
       return {
         ...state,
