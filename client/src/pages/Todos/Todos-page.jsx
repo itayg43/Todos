@@ -16,7 +16,7 @@ const TodosPage = () => {
   return (
     <>
       <SuccessToast
-        isVisible={isSuccess && actionSuccess}
+        isVisible={isSuccess && actionSuccess ? true : false}
         message={getSuccessMessage(actionSuccess)}
       />
       <ErrorToast isVisible={isError} message={error} />
