@@ -11,6 +11,7 @@ import {
   TOGGLE_IS_DELETED,
   TOGGLE_IS_DELETED_SUCCESS,
   TOGGLE_IS_DELETED_FAIL,
+  CHANGE_SEARCH_QUERY,
   CHANGE_FILTER,
 } from "./constants";
 import { TODOS_FILTERS, TODOS_FILTER_STORAGE_KEY } from "../../helpers/constants";
@@ -21,6 +22,7 @@ const initialState = {
   error: null,
   todos: [],
   visibleTodos: [],
+  searchQuery: "",
   filter: localStorage.getItem(TODOS_FILTER_STORAGE_KEY) || TODOS_FILTERS.PENDING,
 };
 
@@ -57,6 +59,13 @@ const todosReducer = (state = initialState, { type, payload }) => {
     case TOGGLE_IS_DELETED_FAIL:
       return { ...state, ...onRequestFail(payload) };
     // change
+    // search query
+    case CHANGE_SEARCH_QUERY:
+      return {
+        ...state,
+        visibleTodos: payload.visibleTodos,
+        searchQuery: payload.searchQuery,
+      };
     // filter
     case CHANGE_FILTER:
       return {
