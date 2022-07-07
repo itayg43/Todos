@@ -1,17 +1,25 @@
+import { useSelector } from "react-redux";
 import { Heading } from "monday-ui-react-core";
 
-import TodoSuccessToast from "./components/Todo-success-toast";
-import TodoErrorToast from "./components/Todo-error-toast";
+import SuccessToast from "../../components/Success-toast";
+import ErrorToast from "../../components/Error-toast";
 import TodoForm from "./components/Todo-form";
 import TodoList from "./components/todo-list/Todo-list";
 import TodosFiltersPanel from "./components/Todos-filters-panel";
+import { getSuccessMessage } from "../../redux/todos/utils";
 import styles from "./todos-page.module.css";
 
 const TodosPage = () => {
+  const todosReducer = useSelector((state) => state.todosReducer);
+  const { isSuccess, actionSuccess, isError, error } = todosReducer;
+
   return (
     <>
-      <TodoSuccessToast />
-      <TodoErrorToast />
+      <SuccessToast
+        isVisible={isSuccess && actionSuccess}
+        message={getSuccessMessage(actionSuccess)}
+      />
+      <ErrorToast isVisible={isError} message={error} />
       <div className={styles.container}>
         <Heading value="Todos" />
         <TodoForm />

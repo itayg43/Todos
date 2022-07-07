@@ -1,10 +1,8 @@
+import PropTypes from "prop-types";
 import { useEffect, useState, useCallback } from "react";
-import { useSelector } from "react-redux";
 import { Toast } from "monday-ui-react-core";
 
-const TodoErrorToast = () => {
-  const { isError, error } = useSelector((state) => state.todosReducer);
-
+const ErrorToast = ({ isVisible, message }) => {
   const [isToastOpen, setIsToastOpen] = useState(false);
 
   const onOpenToast = useCallback(() => {
@@ -16,8 +14,8 @@ const TodoErrorToast = () => {
   }, [setIsToastOpen]);
 
   useEffect(() => {
-    isError ? onOpenToast() : onCloseToast();
-  }, [isError, onOpenToast, onCloseToast]);
+    isVisible ? onOpenToast() : onCloseToast();
+  }, [isVisible, onOpenToast, onCloseToast]);
 
   return (
     <Toast
@@ -26,9 +24,14 @@ const TodoErrorToast = () => {
       autoHideDuration={10000}
       onClose={onCloseToast}
     >
-      {error}
+      {message}
     </Toast>
   );
 };
 
-export default TodoErrorToast;
+ErrorToast.propTypes = {
+  isVisible: PropTypes.bool,
+  message: PropTypes.string,
+};
+
+export default ErrorToast;

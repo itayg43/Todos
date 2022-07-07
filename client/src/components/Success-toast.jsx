@@ -1,12 +1,8 @@
+import PropTypes from "prop-types";
 import { useEffect, useState, useCallback } from "react";
-import { useSelector } from "react-redux";
 import { Toast } from "monday-ui-react-core";
 
-import { getSuccessMessage } from "../../../redux/todos/utils";
-
-const TodoSuccessToast = () => {
-  const { isSuccess, actionSuccess } = useSelector((state) => state.todosReducer);
-
+const SuccessToast = ({ isVisible, message }) => {
   const [isToastOpen, setIsToastOpen] = useState(false);
 
   const onOpenToast = useCallback(() => {
@@ -18,8 +14,8 @@ const TodoSuccessToast = () => {
   }, [setIsToastOpen]);
 
   useEffect(() => {
-    isSuccess && actionSuccess ? onOpenToast() : onCloseToast();
-  }, [isSuccess, actionSuccess, onOpenToast, onCloseToast]);
+    isVisible ? onOpenToast() : onCloseToast();
+  }, [isVisible, onOpenToast, onCloseToast]);
 
   return (
     <Toast
@@ -28,9 +24,14 @@ const TodoSuccessToast = () => {
       autoHideDuration={10000}
       onClose={onCloseToast}
     >
-      {getSuccessMessage(actionSuccess)}
+      {message}
     </Toast>
   );
 };
 
-export default TodoSuccessToast;
+SuccessToast.propTypes = {
+  isVisible: PropTypes.bool,
+  message: PropTypes.string,
+};
+
+export default SuccessToast;
