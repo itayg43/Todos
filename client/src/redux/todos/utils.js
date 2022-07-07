@@ -1,3 +1,4 @@
+import { SUBMIT_TODO, TOGGLE_IS_COMPLETED, TOGGLE_IS_DELETED } from "./constants";
 import { TODOS_FILTERS } from "../../helpers/constants";
 import { trimStringAndLowerCaseAll } from "../../helpers/utils";
 
@@ -34,5 +35,18 @@ const getFilteredTodos = (todos, filter) => {
       return todos.filter((todo) => todo.isDeleted);
     default:
       return todos;
+  }
+};
+
+export const getSuccessMessage = (actionSuccess) => {
+  switch (actionSuccess) {
+    case SUBMIT_TODO:
+      return "Successfully add todo";
+    case TOGGLE_IS_COMPLETED:
+      return "Successfully toggle todo is completed";
+    case TOGGLE_IS_DELETED:
+      return "Successfully toggle todo is deleted";
+    default:
+      return null;
   }
 };
