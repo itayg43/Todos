@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "monday-ui-react-core";
 
@@ -19,13 +19,13 @@ const TodoListItem = ({ todo }) => {
 
   const todoValueRef = useRef(null);
 
-  const onToggleTodoIsCompleted = () => {
+  const onToggleTodoIsCompleted = useCallback(() => {
     dispatch(toggleTodoIsCompleted(todo));
-  };
+  }, [dispatch, todo]);
 
-  const onToggleTodoIsDeleted = () => {
+  const onToggleTodoIsDeleted = useCallback(() => {
     dispatch(toggleTodoIsDeleted(todo));
-  };
+  }, [dispatch, todo]);
 
   useEffect(() => {
     isCompleted
