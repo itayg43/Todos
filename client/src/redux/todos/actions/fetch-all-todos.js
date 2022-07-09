@@ -1,26 +1,26 @@
 import ACTION_TYPES from "./constants/action-types";
 import todosService from "../../../services/todos-service";
 
-const fetchAllAction = () => ({
+const fetchAllTodosAction = () => ({
   type: ACTION_TYPES.FETCH_ALL_TODOS,
 });
 
-const fetchAllActionSuccess = (todos) => ({
+const fetchAllTodosActionSuccess = (todos) => ({
   type: ACTION_TYPES.FETCH_ALL_TODOS_SUCCESS,
   payload: { todos },
 });
 
-const fetchAllActionFail = (errorMessage) => ({
+const fetchAllTodosActionFail = (errorMessage) => ({
   type: ACTION_TYPES.FETCH_ALL_TODOS_FAIL,
   payload: { errorMessage },
 });
 
 export const fetchAllTodos = () => async (dispatch) => {
   try {
-    dispatch(fetchAllAction());
+    dispatch(fetchAllTodosAction());
     const todos = await todosService.fetchAllTodos();
-    dispatch(fetchAllActionSuccess(todos));
+    dispatch(fetchAllTodosActionSuccess(todos));
   } catch (error) {
-    dispatch(fetchAllActionFail(error));
+    dispatch(fetchAllTodosActionFail(error));
   }
 };
