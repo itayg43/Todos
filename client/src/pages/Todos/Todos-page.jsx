@@ -10,7 +10,7 @@ import styles from "./todos-page.module.css";
 
 const TodosPage = () => {
   const { isSuccess, successMessage, isError, errorMessage } = useSelector(
-    (state) => state.todosReducer
+    (state) => state.todosState
   );
 
   return (

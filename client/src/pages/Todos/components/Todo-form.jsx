@@ -18,7 +18,7 @@ const todoSchema = Yup.object().shape({
 const TodoForm = () => {
   const dispatch = useDispatch();
 
-  const { isLoading } = useSelector((state) => state.todosReducer);
+  const { isLoading } = useSelector((state) => state.todosState);
 
   const onSubmitTodo = useCallback(
     ({ value }) => {

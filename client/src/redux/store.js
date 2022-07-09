@@ -6,7 +6,7 @@ import { createLogger } from "redux-logger";
 import todosReducer from "./todos/reducer";
 
 const reducer = combineReducers({
-  todosReducer,
+  todosState: todosReducer,
 });
 
 const initialState = {};

@@ -9,7 +9,7 @@ import { changeSelectedFilter } from "../../../redux/todos/actions/change-select
 const TodosFiltersPanel = () => {
   const dispatch = useDispatch();
 
-  const { selectedFilter } = useSelector((state) => state.todosReducer);
+  const { selectedFilter } = useSelector((state) => state.todosState);
 
   const onChangeSearchQuery = useCallback(
     (searchQuery) => {

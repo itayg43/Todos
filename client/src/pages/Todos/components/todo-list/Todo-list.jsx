@@ -5,7 +5,7 @@ import styles from "./todo-list.module.css";
 
 const TodoList = () => {
   const { isLoading, visibleTodos, selectedFilter } = useSelector(
-    (state) => state.todosReducer
+    (state) => state.todosState
   );
 
   return !visibleTodos.length && !isLoading ? (
