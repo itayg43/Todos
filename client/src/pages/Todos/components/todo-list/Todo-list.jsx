@@ -1,11 +1,18 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
+import { filterTodos } from "../../../../redux/todos/utils";
 import TodoListItem from "../todo-list-item/Todo-list-item";
 import styles from "./todo-list.module.css";
 
 const TodoList = () => {
-  const { isLoading, visibleTodos, selectedFilter } = useSelector(
+  const { isLoading, todos, searchQuery, selectedFilter } = useSelector(
     (state) => state.todosState
+  );
+
+  const visibleTodos = useMemo(
+    () => filterTodos(todos, searchQuery, selectedFilter),
+    [todos, searchQuery, selectedFilter]
   );
 
   return !visibleTodos.length && !isLoading ? (

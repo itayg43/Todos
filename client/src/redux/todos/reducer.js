@@ -1,6 +1,5 @@
 import ACTION_TYPES from "./actions/constants/action-types";
 import { TODOS_FILTERS } from "../../helpers/constants";
-import { filterTodos } from "./utils";
 
 const initialState = {
   isLoading: false,
@@ -9,7 +8,6 @@ const initialState = {
   isError: false,
   errorMessage: "",
   todos: [],
-  visibleTodos: [],
   searchQuery: "",
   selectedFilter: TODOS_FILTERS.PENDING,
 };
@@ -36,41 +34,26 @@ const todosReducer = (state = initialState, { type, payload }) => {
         ...state,
         ...onRequestSuccess(),
         todos,
-        visibleTodos: filterTodos(todos, state.searchQuery, state.selectedFilter),
       };
     }
 
     case ACTION_TYPES.SUBMIT_TODO_SUCCESS: {
       const { successMessage, todo } = payload;
-      const updatedTodos = todo.length
-        ? [...state.todos, ...todo]
-        : [...state.todos, todo];
       return {
         ...state,
         ...onRequestSuccess(successMessage),
-        todos: updatedTodos,
-        visibleTodos: filterTodos(
-          updatedTodos,
-          state.searchQuery,
-          state.selectedFilter
-        ),
+        todos: todo.length ? [...state.todos, ...todo] : [...state.todos, todo],
       };
     }
 
     case ACTION_TYPES.TOGGLE_IS_COMPLETED_SUCCESS:
     case ACTION_TYPES.TOGGLE_IS_DELETED_SUCCESS: {
       const { successMessage, updatedTodo } = payload;
-      const updatedTodos = state.todos.map((todo) =>
-        todo.id === updatedTodo.id ? updatedTodo : todo
-      );
       return {
         ...state,
         ...onRequestSuccess(successMessage),
-        todos: updatedTodos,
-        visibleTodos: filterTodos(
-          updatedTodos,
-          state.searchQuery,
-          state.selectedFilter
+        todos: state.todos.map((todo) =>
+          todo.id === updatedTodo.id ? updatedTodo : todo
         ),
       };
     }
@@ -94,7 +77,6 @@ const todosReducer = (state = initialState, { type, payload }) => {
       const { searchQuery } = payload;
       return {
         ...state,
-        visibleTodos: filterTodos(state.todos, searchQuery, state.selectedFilter),
         searchQuery,
       };
     }
@@ -103,7 +85,6 @@ const todosReducer = (state = initialState, { type, payload }) => {
       const { selectedFilter } = payload;
       return {
         ...state,
-        visibleTodos: filterTodos(state.todos, state.searchQuery, selectedFilter),
         selectedFilter,
       };
     }

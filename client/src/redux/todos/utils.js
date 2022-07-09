@@ -5,9 +5,8 @@ export const filterTodos = (todos, searchQuery, selectedFilter) => {
   if (!todos.length) {
     return [];
   }
-  let query = trimStringAndLowerCaseAll(searchQuery);
-  let visibleTodos;
-  visibleTodos = query ? filterBySearchQuery(todos, query) : todos;
+  const query = trimStringAndLowerCaseAll(searchQuery);
+  const visibleTodos = query ? filterBySearchQuery(todos, query) : todos;
   return filterBySelectedFilter(visibleTodos, selectedFilter);
 };
 
