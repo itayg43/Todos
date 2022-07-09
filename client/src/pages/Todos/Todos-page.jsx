@@ -6,20 +6,17 @@ import ErrorToast from "../../components/Error-toast";
 import TodoForm from "./components/Todo-form";
 import TodoList from "./components/todo-list/Todo-list";
 import TodosFiltersPanel from "./components/Todos-filters-panel";
-import { getSuccessMessage } from "../../redux/todos/utils";
 import styles from "./todos-page.module.css";
 
 const TodosPage = () => {
-  const todosReducer = useSelector((state) => state.todosReducer);
-  const { isSuccess, actionSuccess, isError, error } = todosReducer;
+  const { isSuccess, successMessage, isError, errorMessage } = useSelector(
+    (state) => state.todosReducer
+  );
 
   return (
     <>
-      <SuccessToast
-        isVisible={isSuccess && actionSuccess ? true : false}
-        message={getSuccessMessage(actionSuccess)}
-      />
-      <ErrorToast isVisible={isError} message={error} />
+      <SuccessToast isVisible={isSuccess} message={successMessage} />
+      <ErrorToast isVisible={isError} message={errorMessage} />
       <div className={styles.container}>
         <Heading value="Todos" />
         <TodoForm />

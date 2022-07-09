@@ -19,19 +19,23 @@ const submitTodo = async (value) => {
   }
 };
 
-const toggleTodoIsCompleted = async (id, isCompleted) => {
+const toggleTodoIsCompleted = async (todo) => {
+  const { id, isCompleted } = todo;
   try {
-    const { data } = await todosClient.patch(`/${id}`, { isCompleted });
+    const { data } = await todosClient.patch(`/${id}`, {
+      isCompleted: !isCompleted,
+    });
     return data;
   } catch (error) {
     throw handleError(error);
   }
 };
 
-const toggleTodoIsDeleted = async (id, isDeleted) => {
+const toggleTodoIsDeleted = async (todo) => {
+  const { id, isDeleted } = todo;
   try {
     const { data } = await todosClient.delete(`/${id}`, {
-      data: { isDeleted },
+      data: { isDeleted: !isDeleted },
     });
     return data;
   } catch (error) {

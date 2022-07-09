@@ -6,7 +6,7 @@ import "monday-ui-react-core/dist/main.css";
 import store from "./redux/store";
 import App from "./App";
 import "./index.css";
-import { fetchAllTodos } from "./redux/todos/actions";
+import { fetchAllTodos } from "./redux/todos/actions/fetch-all-todos";
 
 store.dispatch(fetchAllTodos());
 

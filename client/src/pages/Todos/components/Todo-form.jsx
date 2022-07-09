@@ -4,12 +4,8 @@ import { Flex } from "monday-ui-react-core";
 import Add from "monday-ui-react-core/dist/icons/Add";
 import * as Yup from "yup";
 
-import {
-  Form,
-  FormTextField,
-  FormSubmitButton,
-} from "../../../components/forms";
-import { submitTodo } from "../../../redux/todos/actions";
+import { Form, FormTextField, FormSubmitButton } from "../../../components/forms";
+import { submitTodo } from "../../../redux/todos/actions/submit-todo";
 
 const todoInitialValues = {
   value: "",
