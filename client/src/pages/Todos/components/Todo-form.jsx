@@ -36,7 +36,7 @@ const TodoForm = () => {
         resetForm();
       }}
     >
-      <Flex gap={Flex.gaps.SMALL}>
+      <Flex gap={Flex.gaps.SMALL} align={Flex.align.START}>
         <FormTextField
           field="value"
           placeholder="Add new todo"
