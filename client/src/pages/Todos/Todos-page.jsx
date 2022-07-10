@@ -20,8 +20,10 @@ const TodosPage = () => {
       <div className={styles.container}>
         <Heading value="Todos" />
         <TodoForm />
+        <div className={styles.filtersPanelContainer}>
+          <TodosFiltersPanel />
+        </div>
         <TodoList />
-        <TodosFiltersPanel />
       </div>
     </>
   );
