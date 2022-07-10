@@ -1,5 +1,6 @@
 import ACTION_TYPES from "./constants/action-types";
 import todosService from "../../../services/todos-service";
+import { SUCCESS_MESSAGES } from "../../../helpers/constants";
 
 const toggleTodoIsDeletedAction = () => ({
   type: ACTION_TYPES.TOGGLE_IS_DELETED,
@@ -19,7 +20,7 @@ export const toggleTodoIsDeleted = (todo) => async (dispatch) => {
   try {
     dispatch(toggleTodoIsDeletedAction());
     const updatedTodo = await todosService.toggleTodoIsDeleted(todo);
-    const successMessage = updatedTodo.isDeleted ? "Todo deleted" : "Todo reverted";
+    const successMessage = SUCCESS_MESSAGES.TODOS.UPDATE_TODO;
     dispatch(toggleTodoIsDeletedActionSuccess(updatedTodo, successMessage));
   } catch (error) {
     dispatch(toggleTodoIsDeletedActionFail(error));

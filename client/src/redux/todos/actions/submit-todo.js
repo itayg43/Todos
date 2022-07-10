@@ -1,5 +1,6 @@
 import ACTION_TYPES from "./constants/action-types";
 import todosService from "../../../services/todos-service";
+import { SUCCESS_MESSAGES } from "../../../helpers/constants";
 
 const submitTodoAction = () => ({
   type: ACTION_TYPES.SUBMIT_TODO,
@@ -19,7 +20,7 @@ export const submitTodo = (value) => async (dispatch) => {
   try {
     dispatch(submitTodoAction());
     const todo = await todosService.submitTodo(value);
-    const successMessage = "Todo added";
+    const successMessage = SUCCESS_MESSAGES.TODOS.SUBMIT_TODO;
     dispatch(submitTodoActionSuccess(todo, successMessage));
   } catch (error) {
     console.log(error);

@@ -1,3 +1,10 @@
+export const SUCCESS_MESSAGES = {
+  TODOS: {
+    SUBMIT_TODO: "Todo added successfully",
+    UPDATE_TODO: "Todo updated successfully",
+  },
+};
+
 export const ERROR_MESSAGES = {
   DEFAULT:
     "Something went wrong, please try again in a few minutes or contact support",
