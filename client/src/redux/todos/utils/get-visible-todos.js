@@ -1,7 +1,7 @@
-import { FILTERS } from "../../helpers/constants";
-import { trimStringAndLowerCaseAll } from "../../helpers/utils";
+import { FILTERS } from "../../../helpers/constants";
+import { trimStringAndLowerCaseAll } from "../../../helpers/utils";
 
-export const filterTodos = (todos, searchQuery, selectedFilter) => {
+export const getVisibleTodos = (todos, searchQuery, selectedFilter) => {
   if (!todos.length) {
     return [];
   }

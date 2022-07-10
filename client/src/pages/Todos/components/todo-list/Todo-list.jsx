@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-import { filterTodos } from "../../../../redux/todos/utils";
+import { getVisibleTodos } from "../../../../redux/todos/utils/get-visible-todos";
 import TodoListItem from "../todo-list-item/Todo-list-item";
 import EmptyTodoListPlaceholder from "./components/empty-todo-list-placeholder/Empty-todo-list-placeholder";
 import styles from "./todo-list.module.css";
@@ -12,7 +12,7 @@ const TodoList = () => {
   );
 
   const visibleTodos = useMemo(
-    () => filterTodos(todos, searchQuery, selectedFilter),
+    () => getVisibleTodos(todos, searchQuery, selectedFilter),
     [todos, searchQuery, selectedFilter]
   );
 
