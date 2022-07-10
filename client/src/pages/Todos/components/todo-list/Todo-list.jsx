@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import { filterTodos } from "../../../../redux/todos/utils";
 import TodoListItem from "../todo-list-item/Todo-list-item";
+import EmptyTodoListPlaceholder from "./components/empty-todo-list-placeholder/Empty-todo-list-placeholder";
 import styles from "./todo-list.module.css";
 
 const TodoList = () => {
@@ -16,9 +17,7 @@ const TodoList = () => {
   );
 
   return !visibleTodos.length && !isLoading ? (
-    <div className={styles.empty_list}>
-      {`No ${selectedFilter.toLowerCase()} todos`}
-    </div>
+    <EmptyTodoListPlaceholder selectedFilter={selectedFilter} />
   ) : (
     <ul className={styles.list}>
       {visibleTodos.map((todo) => (
