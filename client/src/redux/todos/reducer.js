@@ -1,5 +1,5 @@
 import ACTION_TYPES from "./actions/constants/action-types";
-import { TODOS_FILTERS, STORAGE_KEYS } from "../../helpers/constants";
+import { FILTERS, STORAGE_KEYS } from "../../helpers/constants";
 
 const initialState = {
   isLoading: false,
@@ -10,7 +10,7 @@ const initialState = {
   todos: [],
   searchQuery: "",
   selectedFilter:
-    localStorage.getItem(STORAGE_KEYS.SELECTED_FILTER) || TODOS_FILTERS.PENDING,
+    localStorage.getItem(STORAGE_KEYS.SELECTED_FILTER) || FILTERS.TODOS.PENDING,
 };
 
 const todosReducer = (state = initialState, { type, payload }) => {

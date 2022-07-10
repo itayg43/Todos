@@ -1,4 +1,4 @@
-import { TODOS_FILTERS } from "../../helpers/constants";
+import { FILTERS } from "../../helpers/constants";
 import { trimStringAndLowerCaseAll } from "../../helpers/utils";
 
 export const filterTodos = (todos, searchQuery, selectedFilter) => {
@@ -18,15 +18,15 @@ const filterBySearchQuery = (todos, query) => {
 
 const filterBySelectedFilter = (todos, filter) => {
   switch (filter) {
-    case TODOS_FILTERS.PENDING: {
+    case FILTERS.TODOS.PENDING: {
       return todos.filter((todo) => !todo.isDeleted && !todo.isCompleted);
     }
 
-    case TODOS_FILTERS.COMPLETED: {
+    case FILTERS.TODOS.COMPLETED: {
       return todos.filter((todo) => !todo.isDeleted && todo.isCompleted);
     }
 
-    case TODOS_FILTERS.DELETED: {
+    case FILTERS.TODOS.DELETED: {
       return todos.filter((todo) => todo.isDeleted);
     }
 
