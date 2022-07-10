@@ -23,7 +23,6 @@ export const submitTodo = (value) => async (dispatch) => {
     const successMessage = SUCCESS_MESSAGES.TODOS.SUBMIT_TODO;
     dispatch(submitTodoActionSuccess(todo, successMessage));
   } catch (error) {
-    console.log(error);
     dispatch(submitTodoActionFail(error));
   }
 };
