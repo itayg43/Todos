@@ -41,7 +41,6 @@ const todosReducer = (state = initialState, { type, payload }) => {
     case ACTION_TYPES.SUBMIT_TODO_SUCCESS: {
       const { successMessage, todo } = payload;
       const dataToAdd = Array.isArray(todo) ? todo : [todo];
-      console.log(dataToAdd);
       return {
         ...state,
         ...onRequestSuccess(successMessage),
