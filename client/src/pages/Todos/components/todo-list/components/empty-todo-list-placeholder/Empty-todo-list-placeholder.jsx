@@ -3,11 +3,12 @@ import { useSelector } from "react-redux";
 import styles from "./empty-todo-list-placeholder.module.css";
 
 const EmptyTodoListPlaceholder = () => {
-  const { selectedFilter } = useSelector((state) => state.todosState);
+  const { searchQuery, selectedFilter } = useSelector((state) => state.todosState);
 
   return (
     <div className={styles.emptyList}>
-      {`No ${selectedFilter.toLowerCase()} todos`}
+      {searchQuery && `No result`}
+      {!searchQuery && `No ${selectedFilter.toLowerCase()} todos`}
     </div>
   );
 };
