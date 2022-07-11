@@ -7,7 +7,7 @@ import EmptyTodoListPlaceholder from "./components/empty-todo-list-placeholder/E
 import styles from "./todo-list.module.css";
 
 const TodoList = () => {
-  const { isLoading, todos, searchQuery, selectedFilter } = useSelector(
+  const { todos, searchQuery, selectedFilter } = useSelector(
     (state) => state.todosState
   );
 
@@ -16,8 +16,8 @@ const TodoList = () => {
     [todos, searchQuery, selectedFilter]
   );
 
-  return !visibleTodos.length && !isLoading ? (
-    <EmptyTodoListPlaceholder selectedFilter={selectedFilter} />
+  return !visibleTodos.length ? (
+    <EmptyTodoListPlaceholder />
   ) : (
     <ul className={styles.list}>
       {visibleTodos.map((todo) => (

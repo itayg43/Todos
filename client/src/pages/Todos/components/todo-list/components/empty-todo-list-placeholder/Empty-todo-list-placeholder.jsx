@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
+
 import styles from "./empty-todo-list-placeholder.module.css";
 
-const EmptyTodoListPlaceholder = ({ selectedFilter }) => {
+const EmptyTodoListPlaceholder = () => {
+  const { selectedFilter } = useSelector((state) => state.todosState);
+
   return (
-    <div className={styles.empty_list}>
+    <div className={styles.emptyList}>
       {`No ${selectedFilter.toLowerCase()} todos`}
     </div>
   );
