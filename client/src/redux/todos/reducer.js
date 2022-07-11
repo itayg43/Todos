@@ -48,6 +48,19 @@ const todosReducer = (state = initialState, { type, payload }) => {
       };
     }
 
+    case ACTION_TYPES.SUBMIT_TODO_SUCCESS_WITH_ERROR: {
+      const { todo, errorMessage } = payload;
+      return {
+        ...state,
+        isLoading: false,
+        isSuccess: false,
+        successMessage: "",
+        isError: true,
+        errorMessage,
+        todos: [...state.todos, ...todo],
+      };
+    }
+
     case ACTION_TYPES.TOGGLE_IS_COMPLETED_SUCCESS:
     case ACTION_TYPES.TOGGLE_IS_DELETED_SUCCESS: {
       const { successMessage, updatedTodo } = payload;

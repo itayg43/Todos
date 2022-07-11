@@ -5,34 +5,40 @@ const {
   FailedToFetchPokemonsError,
 } = require("./helpers/errors/pokemon-errors");
 const { STATUS_CODES } = require("../../helpers/constants");
-const POKEMON_ENDPOINT = "pokemon";
+
+const ON_ERROR = {
+  THROW: "throw",
+  RETURN: "return",
+};
 
 const pokemonClient = axios.create({
-  baseURL: "https://pokeapi.co/api/v2/",
+  baseURL: "https://pokeapi.co/api/v2/pokemon",
 });
 
-async function getPokemonById(pokemonId) {
+async function getPokemonById(pokemonId, onError = ON_ERROR.THROW) {
   try {
-    const { data } = await pokemonClient.get(
-      `${POKEMON_ENDPOINT}/${pokemonId}`
-    );
+    const { data } = await pokemonClient.get(`/${pokemonId}`);
     return data;
   } catch (error) {
-    if (error.response?.status === STATUS_CODES.ERROR.CLIENT.NOT_FOUND)
-      throw new PokemonNotFoundError(pokemonId);
-    throw error;
+    if (onError === ON_ERROR.RETURN) {
+      return pokemonId;
+    }
+    throw error.response?.status === STATUS_CODES.ERROR.CLIENT.NOT_FOUND
+      ? new PokemonNotFoundError(pokemonId)
+      : error;
   }
 }
 
 async function getMultiplePokemonsById(pokemonsIds) {
-  try {
-    const requests = pokemonsIds.map((id) => getPokemonById(id));
-    return await Promise.all(requests);
-  } catch (error) {
-    if (error instanceof PokemonNotFoundError)
-      throw new FailedToFetchPokemonsError(pokemonsIds);
-    throw error;
+  const results = await Promise.all(
+    pokemonsIds.map((id) => getPokemonById(id, ON_ERROR.RETURN))
+  );
+  if (results.every((result) => typeof result === "number")) {
+    throw new FailedToFetchPokemonsError(pokemonsIds);
   }
+  const pokemons = results.filter((result) => typeof result === "object");
+  const idsFailed = results.filter((result) => typeof result === "number");
+  return { pokemons, idsFailed };
 }
 
 module.exports = {

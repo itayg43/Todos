@@ -1,6 +1,6 @@
 import ACTION_TYPES from "./constants/action-types";
 import todosService from "../../../services/todos-service";
-import { SUCCESS_MESSAGES } from "../../../helpers/constants";
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from "../../../helpers/constants";
 
 const submitTodoAction = () => ({
   type: ACTION_TYPES.SUBMIT_TODO,
@@ -11,6 +11,11 @@ const submitTodoActionSuccess = (todo, successMessage) => ({
   payload: { todo, successMessage },
 });
 
+const submitTodoActionSuccessWithError = (todo, errorMessage) => ({
+  type: ACTION_TYPES.SUBMIT_TODO_SUCCESS_WITH_ERROR,
+  payload: { todo, errorMessage },
+});
+
 const submitTodoActionFail = (errorMessage) => ({
   type: ACTION_TYPES.SUBMIT_TODO_FAIL,
   payload: { errorMessage },
@@ -19,7 +24,15 @@ const submitTodoActionFail = (errorMessage) => ({
 export const submitTodo = (value) => async (dispatch) => {
   try {
     dispatch(submitTodoAction());
-    const todo = await todosService.submitTodo(value);
+    const { todo, idsFailed } = await todosService.submitTodo(value);
+    if (idsFailed) {
+      return dispatch(
+        submitTodoActionSuccessWithError(
+          todo,
+          `${ERROR_MESSAGES.FAILED_TO_FETCH_POKEMONS_IDS} ${idsFailed.join(", ")}`
+        )
+      );
+    }
     const successMessage = SUCCESS_MESSAGES.TODOS.SUBMIT_TODO;
     dispatch(submitTodoActionSuccess(todo, successMessage));
   } catch (error) {
