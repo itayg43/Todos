@@ -22,7 +22,7 @@ export const toggleTodoIsCompleted = (todo) => async (dispatch) => {
     const updatedTodo = await todosService.toggleTodoIsCompleted(todo);
     const successMessage = SUCCESS_MESSAGES.TODOS.UPDATE_TODO;
     dispatch(toggleTodoIsCompletedActionSuccess(updatedTodo, successMessage));
-  } catch (error) {
-    dispatch(toggleTodoIsCompletedActionFail(error));
+  } catch ({ message }) {
+    dispatch(toggleTodoIsCompletedActionFail(message));
   }
 };

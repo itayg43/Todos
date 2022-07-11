@@ -20,7 +20,7 @@ export const fetchAllTodos = () => async (dispatch) => {
     dispatch(fetchAllTodosAction());
     const todos = await todosService.fetchAllTodos();
     dispatch(fetchAllTodosActionSuccess(todos));
-  } catch (error) {
-    dispatch(fetchAllTodosActionFail(error));
+  } catch ({ message }) {
+    dispatch(fetchAllTodosActionFail(message));
   }
 };
