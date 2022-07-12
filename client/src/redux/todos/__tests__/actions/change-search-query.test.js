@@ -1,26 +1,10 @@
 import todosReducer from "../../reducer";
-import ACTION_TYPES from "../../actions/constants/action-types";
-import { FILTERS } from "../../../../helpers/constants";
-
-const PREV_STATE = {
-  isLoading: false,
-  isSuccess: false,
-  successMessage: "",
-  isError: false,
-  errorMessage: "",
-  todos: [],
-  searchQuery: "",
-  selectedFilter: FILTERS.TODOS.PENDING,
-};
+import { changeSearchQueryAction } from "../../actions/change-search-query";
+import { TEST_STATE } from "../../test-data";
 
 test("should handle search query change", () => {
-  expect(
-    todosReducer(PREV_STATE, {
-      type: ACTION_TYPES.CHANGE_SEARCH_QUERY,
-      payload: { searchQuery: "search" },
-    })
-  ).toEqual({
-    ...PREV_STATE,
+  expect(todosReducer(TEST_STATE, changeSearchQueryAction("search"))).toEqual({
+    ...TEST_STATE,
     searchQuery: "search",
   });
 });
