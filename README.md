@@ -57,9 +57,9 @@
 
 - [x] Add the ability to hide items that were marked as done or to show only them
 
-- [x] \* Debounce search
+- [x] Debounce search
 
-- [x] \* Implement an option to restore the last item that was deleted
+- [x] Implement an option to restore the last item that was deleted
 
 - [x] Add redux logger middleware to your application
 
