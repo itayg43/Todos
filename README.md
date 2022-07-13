@@ -65,10 +65,14 @@
 
 ## Exercise 8:
 
-- [x] Unit tests - test `itemsEntitiesReducer` - add 3 unit tests
+- [x] Unit tests - test `todosReducer` - add 3 unit tests
 
-- [ ] Snapshot tests - 2 components: ListItemComponent, AboutComponent
+- [x] Snapshot tests - `TodoListItem`
 
 - [ ] Integration tests - send 2 items to the ListContainer
 
 - [ ] Create a new test that mocks `fetchItems` and make sure it has been called (do it under the same test file as the ListContainer tests)
+
+- [x] Coverage - get to 50% coverage for `todosReducer` file
+
+- [ ] Add an E2E test to the project using cypress
