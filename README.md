@@ -25,12 +25,12 @@
 
 - Open browser and go to "localhost:3001"
 
-## Ex 8:
+## Exercise 8:
 
-- [ ] Unit tests - test `itemsEntitiesReducer` - add 3 unit tests
-- [ ] Snapshot tests - 2 components
-      ListItemComponent
-      AboutComponent
-- [ ] Integration tests - send 2 items to the
-      ListContainer
+- [x] Unit tests - test `itemsEntitiesReducer` - add 3 unit tests
+
+- [ ] Snapshot tests - 2 components: ListItemComponent, AboutComponent
+
+- [ ] Integration tests - send 2 items to the ListContainer
+
 - [ ] Create a new test that mocks `fetchItems` and make sure it has been called (do it under the same test file as the ListContainer tests)
