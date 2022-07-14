@@ -15,9 +15,9 @@ export const TEST_TODO = {
   id: 1,
   value: "1",
   isCompleted: false,
-  completedAt: 0,
+  completedAt: null,
   isDeleted: false,
-  deletedAt: 0,
+  deletedAt: null,
 };
 
 export const TEST_TODOS = [TEST_TODO, TEST_TODO];

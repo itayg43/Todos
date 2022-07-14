@@ -22,7 +22,7 @@ const todos = [
     id: 2,
     value: "Buy battery for the new laptop",
     isCompleted: true,
-    completedAt: new Date().valueOf(),
+    completedAt: 1,
     isDeleted: false,
     deletedAt: null,
   },
@@ -32,52 +32,47 @@ const todos = [
     isCompleted: false,
     completedAt: null,
     isDeleted: true,
-    deletedAt: new Date().valueOf(),
+    deletedAt: 1,
   },
 ];
 
+const mockUseSelector = (todos, searchQuery, selectedFilter) => {
+  useSelector.mockImplementation((selector) =>
+    selector({
+      todosState: {
+        todos,
+        searchQuery,
+        selectedFilter,
+      },
+    })
+  );
+};
+
 describe("todo list", () => {
+  // empty
+  test("should render empty placeholder", () => {
+    mockUseSelector([], "", FILTERS.TODOS.PENDING);
+    render(<TodoList />);
+    expect(screen.getByText("No pending todos")).toBeInTheDocument();
+  });
+
   // pending
   test("should render pending todos", () => {
-    useSelector.mockImplementation((selector) =>
-      selector({
-        todosState: {
-          todos,
-          searchQuery: "",
-          selectedFilter: FILTERS.TODOS.PENDING,
-        },
-      })
-    );
+    mockUseSelector(todos, "", FILTERS.TODOS.PENDING);
     render(<TodoList />);
     expect(screen.getByText("Buy new laptop")).toBeInTheDocument();
   });
 
   // completed
   test("should render completed todos", () => {
-    useSelector.mockImplementation((selector) =>
-      selector({
-        todosState: {
-          todos,
-          searchQuery: "",
-          selectedFilter: FILTERS.TODOS.COMPLETED,
-        },
-      })
-    );
+    mockUseSelector(todos, "", FILTERS.TODOS.COMPLETED);
     render(<TodoList />);
     expect(screen.getByText("Buy battery for the new laptop")).toBeInTheDocument();
   });
 
   // deleted
   test("should render deleted todos", () => {
-    useSelector.mockImplementation((selector) =>
-      selector({
-        todosState: {
-          todos,
-          searchQuery: "",
-          selectedFilter: FILTERS.TODOS.DELETED,
-        },
-      })
-    );
+    mockUseSelector(todos, "", FILTERS.TODOS.DELETED);
     render(<TodoList />);
     expect(screen.getByText("Sell old laptop")).toBeInTheDocument();
   });
