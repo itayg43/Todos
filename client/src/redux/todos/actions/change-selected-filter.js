@@ -1,7 +1,7 @@
 import ACTION_TYPES from "./constants/action-types";
 import { STORAGE_KEYS } from "../../../helpers/constants";
 
-const changeSelectedFilterAction = (selectedFilter) => ({
+export const changeSelectedFilterAction = (selectedFilter) => ({
   type: ACTION_TYPES.CHANGE_SELECTED_FILTER,
   payload: { selectedFilter },
 });

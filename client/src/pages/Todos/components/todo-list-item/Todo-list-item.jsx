@@ -31,7 +31,7 @@ const TodoListItem = ({ todo }) => {
   return (
     <>
       <TodoTooltip isVisible={isTodoItemHovered} todo={todo} />
-      <li className={styles.item}>
+      <li id="todo-list-item" className={styles.item}>
         <Checkbox
           disabled={isDeleted}
           checked={isCompleted}

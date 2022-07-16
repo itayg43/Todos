@@ -24,3 +24,15 @@
   ```
 
 - Open browser and go to "localhost:3001"
+
+## Exercise 8:
+
+- [x] Unit test - `todosReducer`
+
+- [x] Snapshot test - `TodoListItem`
+
+- [x] Integration test - `TodoList` with: 1 pending, 1 completed, and 1 deleted todos
+
+- [x] Coverage - get to 50% coverage for `todosReducer` file
+
+- [ ] Add an E2E test to the project using cypress
