@@ -19,7 +19,7 @@ const TodoList = () => {
   return !visibleTodos.length ? (
     <EmptyTodoListPlaceholder />
   ) : (
-    <ul className={styles.list}>
+    <ul id="todo-list" className={styles.list}>
       {visibleTodos.map((todo) => (
         <TodoListItem key={todo.id} todo={todo} />
       ))}

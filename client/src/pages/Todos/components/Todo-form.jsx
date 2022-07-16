@@ -38,6 +38,7 @@ const TodoForm = () => {
     >
       <Flex gap={Flex.gaps.SMALL} align={Flex.align.START}>
         <FormTextField
+          id="todo-input"
           field="value"
           placeholder="Add new todo"
           loading={isLoading}

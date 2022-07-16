@@ -18,7 +18,7 @@ const TodosPage = () => {
       <SuccessToast isVisible={isSuccess} message={successMessage} />
       <ErrorToast isVisible={isError} message={errorMessage} />
       <div className={styles.container}>
-        <Heading value="Todos" />
+        <Heading id="todos-heading" value="Todos" />
         <TodoForm />
         <div className={styles.filtersPanelContainer}>
           <TodosFiltersPanel />
