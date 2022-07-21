@@ -38,7 +38,10 @@ async function getMultiplePokemonsById(pokemonsIds) {
   }
   const pokemons = results.filter((result) => typeof result === "object");
   const idsFailed = results.filter((result) => typeof result === "number");
-  return { pokemons, idsFailed };
+  return {
+    pokemons,
+    idsFailed: idsFailed.length ? idsFailed : null,
+  };
 }
 
 module.exports = {
