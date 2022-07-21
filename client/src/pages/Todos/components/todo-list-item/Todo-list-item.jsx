@@ -1,33 +1,26 @@
 import PropTypes from "prop-types";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "monday-ui-react-core";
 
-import {
-  toggleTodoIsCompleted,
-  toggleTodoIsDeleted,
-} from "../../../../redux/todos/actions";
+import { toggleTodoIsCompleted } from "../../../../redux/todos/actions/toggle-todo-is-completed";
 import useIsHovered from "../../../../hooks/use-is-hovered";
 import TodoTooltip from "../Todo-tooltip";
-import TodoToggleIsDeletedIconButton from "../Todo-toggle-Is-deleted-icon-button";
+import TodoListItemActionsIconButton from "./components/todo-list-item-actions-icon-button";
 import styles from "./todo-list-item.module.css";
 
 const TodoListItem = ({ todo }) => {
   const dispatch = useDispatch();
 
-  const { id, value, isCompleted, isDeleted } = todo;
+  const { value, isCompleted, isDeleted } = todo;
 
   const [isTodoItemHovered, hoverEventHandlers] = useIsHovered();
 
   const todoValueRef = useRef(null);
 
-  const onToggleTodoIsCompleted = () => {
-    dispatch(toggleTodoIsCompleted({ id, isCompleted: !isCompleted }));
-  };
-
-  const onToggleTodoIsDeleted = () => {
-    dispatch(toggleTodoIsDeleted({ id, isDeleted: !isDeleted }));
-  };
+  const onToggleTodoIsCompleted = useCallback(() => {
+    dispatch(toggleTodoIsCompleted(todo));
+  }, [dispatch, todo]);
 
   useEffect(() => {
     isCompleted
@@ -47,10 +40,7 @@ const TodoListItem = ({ todo }) => {
         <span ref={todoValueRef} className={styles.value} {...hoverEventHandlers}>
           {value}
         </span>
-        <TodoToggleIsDeletedIconButton
-          isDeleted={isDeleted}
-          onToggle={onToggleTodoIsDeleted}
-        />
+        <TodoListItemActionsIconButton todo={todo} />
       </li>
     </>
   );

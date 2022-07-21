@@ -14,8 +14,8 @@ const SuccessToast = ({ isVisible, message }) => {
   }, [setIsToastOpen]);
 
   useEffect(() => {
-    isVisible ? onOpenToast() : onCloseToast();
-  }, [isVisible, onOpenToast, onCloseToast]);
+    isVisible && message ? onOpenToast() : onCloseToast();
+  }, [isVisible, message, onOpenToast, onCloseToast]);
 
   return (
     <Toast

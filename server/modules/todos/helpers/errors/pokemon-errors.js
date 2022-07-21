@@ -9,9 +9,7 @@ class PokemonNotFoundError extends Error {
 
 class FailedToFetchPokemonsError extends Error {
   constructor(pokemonsIds) {
-    super(
-      `Failed to fetch pokemons with this input: ${pokemonsIds.join(", ")}`
-    );
+    super(`Failed to fetch pokemons with ids: ${pokemonsIds.join(", ")}`);
     this.statusCode = STATUS_CODES.ERROR.CLIENT.NOT_FOUND;
   }
 }

@@ -3,10 +3,12 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createLogger } from "redux-logger";
 
+import appReducer from "./app/reducer";
 import todosReducer from "./todos/reducer";
 
 const reducer = combineReducers({
-  todosReducer,
+  appState: appReducer,
+  todosState: todosReducer,
 });
 
 const initialState = {};

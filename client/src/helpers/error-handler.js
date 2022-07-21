@@ -1,10 +1,11 @@
-import { DEFAULT_ERROR_MESSAGE } from "./constants";
+import { ERROR_MESSAGES } from "./constants";
 
 const handleError = (error) => {
   console.error(error);
-  return error.response?.data?.message
+  const message = error.response?.data?.message
     ? error.response.data.message
-    : DEFAULT_ERROR_MESSAGE;
+    : ERROR_MESSAGES.DEFAULT;
+  return new Error(message);
 };
 
 export default handleError;

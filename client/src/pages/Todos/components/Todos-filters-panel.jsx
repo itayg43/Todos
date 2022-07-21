@@ -2,13 +2,14 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Flex, Search, ButtonGroup } from "monday-ui-react-core";
 
-import { TODOS_FILTERS } from "../../../helpers/constants";
-import { changeSearchQuery, changeFilter } from "../../../redux/todos/actions";
+import { FILTERS } from "../../../helpers/constants";
+import { changeSearchQuery } from "../../../redux/todos/actions/change-search-query";
+import { changeSelectedFilter } from "../../../redux/todos/actions/change-selected-filter";
 
 const TodosFiltersPanel = () => {
   const dispatch = useDispatch();
 
-  const { filter } = useSelector((state) => state.todosReducer);
+  const { selectedFilter } = useSelector((state) => state.todosState);
 
   const onChangeSearchQuery = useCallback(
     (searchQuery) => {
@@ -19,7 +20,7 @@ const TodosFiltersPanel = () => {
 
   const onChangeFilter = useCallback(
     (filter) => {
-      dispatch(changeFilter(filter));
+      dispatch(changeSelectedFilter(filter));
     },
     [dispatch]
   );
@@ -33,11 +34,11 @@ const TodosFiltersPanel = () => {
       />
       <ButtonGroup
         onSelect={onChangeFilter}
-        options={Object.values(TODOS_FILTERS).map((filter) => ({
+        options={Object.values(FILTERS.TODOS).map((filter) => ({
           text: filter,
           value: filter,
         }))}
-        value={filter}
+        value={selectedFilter}
       />
     </Flex>
   );

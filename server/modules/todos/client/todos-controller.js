@@ -3,8 +3,8 @@ const todosService = require("../business-logic/todos-service");
 
 async function submitTodo(req, res) {
   const { value } = req.body;
-  const todo = await todosService.submitTodo(value);
-  res.status(STATUS_CODES.SUCCESS.CREATED).json(todo);
+  const { todo, idsFailed } = await todosService.submitTodo(value);
+  res.status(STATUS_CODES.SUCCESS.CREATED).json({ todo, idsFailed });
 }
 
 async function fetchAllTodos(_, res) {

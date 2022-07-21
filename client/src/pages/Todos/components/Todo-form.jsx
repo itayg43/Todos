@@ -4,12 +4,8 @@ import { Flex } from "monday-ui-react-core";
 import Add from "monday-ui-react-core/dist/icons/Add";
 import * as Yup from "yup";
 
-import {
-  Form,
-  FormTextField,
-  FormSubmitButton,
-} from "../../../components/forms";
-import { submitTodo } from "../../../redux/todos/actions";
+import { Form, FormTextField, FormSubmitButton } from "../../../components/forms";
+import { submitTodo } from "../../../redux/todos/actions/submit-todo";
 
 const todoInitialValues = {
   value: "",
@@ -22,7 +18,7 @@ const todoSchema = Yup.object().shape({
 const TodoForm = () => {
   const dispatch = useDispatch();
 
-  const { isLoading } = useSelector((state) => state.todosReducer);
+  const { isLoading } = useSelector((state) => state.todosState);
 
   const onSubmitTodo = useCallback(
     ({ value }) => {
@@ -40,7 +36,7 @@ const TodoForm = () => {
         resetForm();
       }}
     >
-      <Flex gap={Flex.gaps.SMALL}>
+      <Flex gap={Flex.gaps.SMALL} align={Flex.align.START}>
         <FormTextField
           field="value"
           placeholder="Add new todo"

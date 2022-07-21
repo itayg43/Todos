@@ -1,19 +1,30 @@
 const { getPokemonById, getMultiplePokemonsById } = require("../pokemon-client");
 const { capitalize, trimLowerCase } = require("../../../helpers/utils");
 const todosDataAccess = require("../data-access/todos-data-access");
+const { TodoModelToDtoMapper } = require("./dto/todo-model-to-dto-mapper");
 
-async function onAddPokemon(pokemonStrId) {
+const todoModelToDtoMapper = new TodoModelToDtoMapper();
+
+async function submitPokemon(pokemonStrId) {
   const pokemonId = Number.parseInt(pokemonStrId);
   const { name } = await getPokemonById(pokemonId);
   const pokemonData = preparePokemonData(name);
-  return await todosDataAccess.submitTodo(pokemonData);
+  const todo = await todosDataAccess.submitTodo(pokemonData);
+  return {
+    todo: todoModelToDtoMapper.convert(todo),
+    idsFailed: null,
+  };
 }
 
-async function onAddMultiplePokemons(pokemonsStrIds) {
+async function submitMultiplePokemons(pokemonsStrIds) {
   const pokemonIds = preparePokemonsIds(pokemonsStrIds);
-  const pokemons = await getMultiplePokemonsById(pokemonIds);
+  const { pokemons, idsFailed } = await getMultiplePokemonsById(pokemonIds);
   const pokemonsData = pokemons.map(({ name }) => preparePokemonData(name));
-  return await todosDataAccess.submitMultipleTodos(pokemonsData);
+  const todos = await todosDataAccess.submitMultipleTodos(pokemonsData);
+  return {
+    todo: todos.map((todo) => todoModelToDtoMapper.convert(todo)),
+    idsFailed,
+  };
 }
 
 function preparePokemonsIds(pokemonsStrIds) {
@@ -34,6 +45,6 @@ function preparePokemonName(name) {
 }
 
 module.exports = {
-  onAddPokemon,
-  onAddMultiplePokemons,
+  submitPokemon,
+  submitMultiplePokemons,
 };
