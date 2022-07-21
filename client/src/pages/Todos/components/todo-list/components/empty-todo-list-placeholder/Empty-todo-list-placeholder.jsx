@@ -5,12 +5,11 @@ import styles from "./empty-todo-list-placeholder.module.css";
 const EmptyTodoListPlaceholder = () => {
   const { searchQuery, selectedFilter } = useSelector((state) => state.todosState);
 
-  return (
-    <div className={styles.emptyList}>
-      {searchQuery && `No result`}
-      {!searchQuery && `No ${selectedFilter.toLowerCase()} todos`}
-    </div>
-  );
+  const emptyListText = searchQuery
+    ? `No result for ${searchQuery}`
+    : `No ${selectedFilter.toLowerCase()} todos`;
+
+  return <div className={styles.emptyList}>{emptyListText}</div>;
 };
 
 export default EmptyTodoListPlaceholder;
